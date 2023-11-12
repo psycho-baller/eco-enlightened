@@ -18,11 +18,13 @@ The browser extension follows you everywhere and tracks what you write. It then 
 - Prompting the LLM to only send a response when the user is talking about sustainability. unfortunately, LLMs care about you so when you talk about how tragic your day was, it will empathize with you instead of just not responding.
 - Websockets just decided to not work for us... so we just went for REST instead
 
-## Accomplishments that we're proud of
+## Accomplishments that we're proud of & What we learned
 
 - Getting the LLM to work with a vector database of knowledge on sustainability
 - Finally understanding how Docker works
 
-## What we learned
-
 ## What's next for Eco Enlightened
+
+- Even better LLM
+- Other forms of input (voice, images, etc)
+- Other topics (physical health, mental health, etc)
