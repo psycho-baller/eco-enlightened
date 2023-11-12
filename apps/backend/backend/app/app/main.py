@@ -180,6 +180,72 @@ async def websocket_mirror(websocket: WebSocket):
         except Exception as e:
             logging.error(e)
             await websocket.close()
+            
+@app.post("/chat/{user_id}")
+async def endpoint(user_id: UUID, user_message: IUserMessage):
+    # get user_id
+    # get user_message
+    message = user_message.message
+    print('message', message)
+    session_id = str(uuid4())
+    key: str = f"user_id:{user_id}:session:{session_id}"
+    # await websocket.accept()
+    # redis_client = await get_redis_client()
+    # ws_ratelimit = WebSocketRateLimiter(times=200, hours=24)
+    # chat = ChatOpenAI(temperature=0, openai_api_key=settings.OPENAI_API_KEY)
+    chat_history = []
+    # docs_with_scores = app.vector_db.similarity_search_with_score(user_message.message)
+    # print(docs_with_scores)
+    retriever = app.vector_db.as_retriever(search_kwargs={'k': 3})  # default 4
+    prompt_template = """You are an intelligent assistant designed to interact with users looking to live a more sustainable lifestyle. Your purpose is to help users explore and apply knowledge related to sustainability. If a user mentions a specific topic, provide relevant details and suggest sustainable alternatives or practices. Additionally, always prioritize positive reinforcement and motivation to inspire users to adopt a more sustainable lifestyle. 
+
+You will be given 2 main things:
+ - JOURNAL: a user's journal output
+ - KNOWLEDGE: sustainability knowledge related to the user's journal output.
+JOURNAL: "{question}"
+KNOWLEDGE: "{context}"
+
+You will need to comment on the user's journal output with sustainability knowledge. You will also need to suggest sustainable alternatives or practices to the user.
+If there is no mention of anything related to sustainability, ignore the user's response and reply with: "None". Otherwise you will need to comment on the user's journal output on how he can live a more sustainable lifestyle.
+COMMENT:
+"""
+
+
+    PROMPT = PromptTemplate(
+        template=prompt_template, input_variables=["question", "context"]
+    )
+    chain_type_kwargs = {"prompt": PROMPT}
+    print(chain_type_kwargs)
+    qa = RetrievalQA.from_chain_type(
+        llm=OpenAI(),
+        chain_type="stuff",
+        retriever=retriever,
+        chain_type_kwargs=chain_type_kwargs,
+    )
+    print(qa._chain_type)
+    result = qa.run(message)
+    print('result', result)
+                # await websocket.send_json(resp.dict())
+
+                # # # Construct a response
+                # start_resp = IChatResponse(
+                #     sender="bot", message="", type="start", message_id="", id=""
+                # )
+                # await websocket.send_json(start_resp.dict())
+
+                # result = chat([HumanMessage(content=resp.message)])
+    chat_history.append((user_message.message, result))
+    end_resp = IChatResponse(
+        sender="bot",
+        message=result,
+        type="end",
+        message_id=str(uuid7()),
+        id=str(uuid7()),
+    )
+    # await websocket.send_json(end_resp.dict())
+    return end_resp.dict()
+
+
 
 @app.websocket("/chat/{user_id}")
 async def websocket_endpoint(websocket: WebSocket, user_id: UUID):

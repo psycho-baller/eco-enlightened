@@ -1,5 +1,6 @@
 import { sendMessageToContentScript, type MessageToBackgroundRequest } from 'lib/utils/messaging';
 import browser from 'webextension-polyfill';
+import { suggest } from '~lib/llm';
 
 browser.runtime.onInstalled.addListener((details) => {
 	if (details.reason === 'install') {
@@ -15,10 +16,12 @@ browser.runtime.onInstalled.addListener((details) => {
 
 browser.runtime.onMessage.addListener(async (message: MessageToBackgroundRequest) => {
 	switch (message.action) {
-		case 'updateContent':
+		case 'updateContent': {
 			// send response to content script UI with AI response
-			sendMessageToContentScript({ command: 'update-ai-response', content: message.content });
+			const aiRes = await suggest(message.content);
+			sendMessageToContentScript({ command: 'update-ai-response', content: aiRes });
 			break;
+		}
 		case 'openOptionsPage':
 			browser.runtime.openOptionsPage();
 			break;

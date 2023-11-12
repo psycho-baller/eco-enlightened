@@ -18,6 +18,7 @@ export const config: PlasmoCSConfig = {
 
 content.init();
 document.addEventListener('keypress', (event) => {
+	console.log(event);
 	const mainContent = document.querySelector('.notion-page-content');
 	if (!mainContent) return;
 
@@ -27,7 +28,7 @@ document.addEventListener('keypress', (event) => {
 		.map((child) => child.textContent)
 		.join('\n');
 	if (!textContent) return;
-
+	console.log(textContent);
 	content.set(textContent);
 });
 

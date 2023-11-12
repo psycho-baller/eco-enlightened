@@ -18,12 +18,11 @@
 <script lang="ts">
 	import { aiResponse } from '~lib/stores/aiResponse';
 	import browser from 'webextension-polyfill';
-	import { suggest } from '~lib/llm';
 	browser.runtime.onMessage.addListener(async function (message: MessageToContentScriptRequest) {
 		if (message.command === 'update-ai-response') {
-			const aiRes = await suggest(message.content);
-			console.log('aiRes', aiRes);
-			aiResponse.set(aiRes);
+			// const aiRes = await suggest(message.content);
+			console.log('aiRes', message.content);
+			aiResponse.set(message.content);
 		}
 	});
 </script>
