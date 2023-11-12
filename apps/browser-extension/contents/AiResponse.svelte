@@ -3,7 +3,6 @@
 	import type { PlasmoCSConfig } from 'plasmo';
 
 	import cssText from 'data-text:~style.css';
-	console.log('cssText', cssText);
 	export const getStyle = () => {
 		const style = document.createElement('style');
 		style.textContent = cssText;

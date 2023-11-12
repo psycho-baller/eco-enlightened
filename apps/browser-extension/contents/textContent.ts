@@ -19,14 +19,13 @@ export const config: PlasmoCSConfig = {
 content.init();
 document.addEventListener('keypress', (event) => {
 	const mainContent = document.querySelector('.notion-page-content');
-	console.log(mainContent);
 	if (!mainContent) return;
 
 	const textContent = Array.from(mainContent.children)
+		// remove blocks that are not text
 		.filter((child) => !child.classList.contains('notion-collection_view-block'))
 		.map((child) => child.textContent)
 		.join('\n');
-	console.log(textContent);
 	if (!textContent) return;
 
 	content.set(textContent);

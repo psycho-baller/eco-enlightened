@@ -16,7 +16,6 @@ browser.runtime.onInstalled.addListener((details) => {
 browser.runtime.onMessage.addListener(async (message: MessageToBackgroundRequest) => {
 	switch (message.action) {
 		case 'updateContent':
-			console.log(message.content);
 			// send response to content script UI with AI response
 			sendMessageToContentScript({ command: 'update-ai-response', content: message.content });
 			break;

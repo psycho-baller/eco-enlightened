@@ -8,14 +8,13 @@ export const content = createStoreSyncedWithStorage<string>({
 
 let timeoutId: NodeJS.Timeout;
 content.subscribe((value) => {
-	// only send if length > 10
-	if (value.length < 10) return;
+	// only send if length > 100
+	if (value.length < 100) return;
 	console.log(value);
-	// debounce: wait 1 second before sending
+	// debounce: wait 2 second before sending
 	clearTimeout(timeoutId);
 	timeoutId = setTimeout(() => {
-		console.log('sending message to background');
 		sendMessageToBackground({ action: 'updateContent', content: value });
 		// clearTimeout(timeoutId);
-	}, 500);
+	}, 2000);
 });
