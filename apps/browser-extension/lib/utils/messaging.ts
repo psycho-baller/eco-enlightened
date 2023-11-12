@@ -1,7 +1,7 @@
 import browser from 'webextension-polyfill';
-export type MessageToBackgroundRequest = {
-	action: 'openOptionsPage';
-};
+export type MessageToBackgroundRequest =
+	| { action: 'updateContent'; content: string }
+	| { action: 'openOptionsPage' };
 
 /** Sends a message to the background script, captured in {@link ~background/index.ts}. */
 export function sendMessageToBackground(message: MessageToBackgroundRequest) {
@@ -9,7 +9,8 @@ export function sendMessageToBackground(message: MessageToBackgroundRequest) {
 }
 
 export type MessageToContentScriptRequest = {
-	command: 'toggle-recording';
+	command: 'update-ai-response';
+	content: string;
 };
 /** Sends a message to the content script, captured in {@link ~contents/globalToggleRecording}. */
 export async function sendMessageToContentScript(message: MessageToContentScriptRequest) {
