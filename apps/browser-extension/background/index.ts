@@ -9,16 +9,14 @@ browser.runtime.onInstalled.addListener((details) => {
 	}
 });
 
-browser.commands.onCommand.addListener(async function (command) {
+browser.commands.onCommand.addListener(async (command) => {
 	if (command === 'toggle-recording') {
 		sendMessageToContentScript({ command: 'toggle-recording' });
 	}
 });
 
-browser.runtime.onMessage.addListener(function (message: MessageToBackgroundRequest) {
+browser.runtime.onMessage.addListener((message: MessageToBackgroundRequest) => {
 	switch (message.action) {
-		case 'setExtensionIcon':
-			break;
 		case 'openOptionsPage':
 			browser.runtime.openOptionsPage();
 			break;

@@ -1,5 +1,4 @@
 import { get } from 'svelte/store';
-import type { Icon } from 'background/setIcon';
 import { writeTextToClipboard } from '~lib/utils/dom';
 import { options } from 'lib/stores/options';
 import { sendMessageToBackground } from 'lib/utils/messaging';

@@ -1,5 +1,6 @@
 import { toggleRecording } from './toggleRecording';
 import type { PlasmoCSConfig } from 'plasmo';
+import browser from 'webextension-polyfill';
 import { writeTextToCursor } from '~lib/utils/dom';
 import { sendMessageToBackground, type MessageToContentScriptRequest } from 'lib/utils/messaging';
 
@@ -7,11 +8,11 @@ export const config: PlasmoCSConfig = {
 	matches: ['https://chat.openai.com/*']
 };
 
-chrome.runtime.onMessage.addListener(async function (message: MessageToContentScriptRequest) {
+browser.runtime.onMessage.addListener(async function (message: MessageToContentScriptRequest) {
 	if (message.command === 'toggle-recording')
 		await toggleRecording({
-			switchIcon: (icon) => {
-				sendMessageToBackground({ action: 'setExtensionIcon', icon });
+			switchIcon: () => {
+				console.log('switchIcon');
 			},
 			onSuccessfulTranscription: (text: string) => writeTextToCursor(text)
 		});

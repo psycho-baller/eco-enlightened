@@ -3,6 +3,7 @@
 	import toast from 'svelte-french-toast/dist/core/toast';
 	import { writeTextToClipboard } from '~lib/utils/dom';
 	import { sendMessageToContentScript } from '~lib/utils/messaging';
+	import browser from 'webextension-polyfill';
 
 	// --- Recording Logic ---
 
@@ -21,7 +22,7 @@
 	// --- Copy Output Button ---
 
 	function openOptionsPage() {
-		chrome.runtime.openOptionsPage();
+		browser.runtime.openOptionsPage();
 	}
 
 	// recordingState.init();

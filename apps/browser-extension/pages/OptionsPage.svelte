@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import toast from 'svelte-french-toast/dist/core/toast';
 	import { options } from '~lib/stores/options';
+	import browser from 'webextension-polyfill';
 
 	let apiKeyInput: HTMLInputElement;
 	let showOptions: boolean;
@@ -9,7 +10,7 @@
 	const closeWindowAfterMs = (ms: number) => setTimeout(() => window.close(), ms);
 
 	function openExtensionsShortcutsPage() {
-		chrome.tabs.create({ url: 'chrome://extensions/shortcuts' });
+		browser.tabs.create({ url: 'chrome://extensions/shortcuts' });
 	}
 
 	options.init();
