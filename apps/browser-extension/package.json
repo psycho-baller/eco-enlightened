@@ -1,7 +1,7 @@
 {
 	"name": "eco-enlightened",
 	"displayName": "Eco Enlightened",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "Where sustainability meets your thoughts",
 	"author": "Rami <rami.rami@ucalgary.ca> (ramimaalouf.tech)",
 	"license": "MIT",
@@ -39,6 +39,8 @@
 			"https://*/*"
 		],
 		"permissions": [
+			"storage",
+			"tabs",
 			"clipboardWrite"
 		],
 		"commands": {
