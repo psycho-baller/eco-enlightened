@@ -15,6 +15,5 @@ content.subscribe((value) => {
 	clearTimeout(timeoutId);
 	timeoutId = setTimeout(() => {
 		sendMessageToBackground({ action: 'updateContent', content: value });
-		clearTimeout(timeoutId);
 	}, 2000);
 });
