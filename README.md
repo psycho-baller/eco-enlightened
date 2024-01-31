@@ -10,7 +10,7 @@ An extension for your digital life that makes it easy for you to learn about sus
 
 ## How we built it
 
-The browser extension follows you everywhere and tracks what you write. It then uses Algoriths and an LLM to determine the context of what you are writing about. If the context is related to sustainability, it will show you a popup with information about the topic and personalized actions you can take to improve your impact on the environment.
+The browser extension follows you everywhere and tracks what you write. It then uses Algorithms and an LLM to determine the context of what you are writing about. If the context is related to sustainability, it will show you a popup with information about the topic and personalized actions you can take to improve your impact on the environment.
 
 ## Challenges we ran into
 
