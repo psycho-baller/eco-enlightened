@@ -6,7 +6,7 @@
 
 ## Inspiration
 
-Our lives are filled with habits and lifestyles that cause negative consequences without us even being aware of it, one major consequence is the impact on our environment. For that reason, we wented to create an extension for your digital life that would help you become more aware of how your actions affect the environment and how you can change them for the better.
+Our lives are filled with habits and lifestyles that cause negative consequences without us even being aware of it. One major consequence is the impact on our environment. For that reason, we wanted to create an extension for your digital life that would help you become more aware of how your actions affect the environment and how you can change them for the better.
 
 ## What it does
 
